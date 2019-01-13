@@ -120,3 +120,9 @@ def _merge(row):
     if core[-1] is None:
         core.pop()
     return core
+
+
+
+
+
+#将4X4的棋盘转化成【4，4，16】的格式
