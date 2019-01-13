@@ -1,7 +1,23 @@
 from game2048.game import Game
 from game2048.displays import Display
-from game2048.agents import TRAINLABEL,TRAINDATA
-import numpy as np
+import sys
+
+
+class Logger(object):
+    def __init__(self, fileN="Default.log"):
+        self.terminal = sys.stdout
+        self.log = open(fileN, "w")
+
+    def write(self, message):
+        self.terminal.write(message)
+        self.log.write(message)
+
+    def flush(self):
+        pass
+
+sys.stdout = Logger("EE369_evaluation.log")
+
+
 
 def single_run(size, score_to_win, AgentClass, **kwargs):
     game = Game(size, score_to_win)
@@ -14,12 +30,12 @@ def single_run(size, score_to_win, AgentClass, **kwargs):
 
 if __name__ == '__main__':
     GAME_SIZE = 4
-    SCORE_TO_WIN = 64
-    N_TESTS = 10000
+    SCORE_TO_WIN = 2048
+    N_TESTS = 50
 
     '''====================
     Use your own agent here.'''
-    from game2048.agents import ExpectiMaxAgent as TestAgent
+    from main import YourOwnAgent as TestAgent
     '''===================='''
 
     scores = []
@@ -27,8 +43,8 @@ if __name__ == '__main__':
         score = single_run(GAME_SIZE, SCORE_TO_WIN,
                            AgentClass=TestAgent)
         scores.append(score)
-    np.save('Test_trainData.npy',TRAINDATA)
-    np.save('Test_trainLabel.npy', TRAINLABEL)
+    #np.save('Test_trainData.npy',TRAINDATA)
+    #np.save('Test_trainLabel.npy', TRAINLABEL)
 
 
 

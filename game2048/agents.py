@@ -58,16 +58,4 @@ class RandomAgent(Agent):
         return direction
 
 
-class ExpectiMaxAgent(Agent):
 
-    def __init__(self, game, display=None):
-        if game.size != 4:
-            raise ValueError(
-                "`%s` can only work with game of `size` 4." % self.__class__.__name__)
-        super().__init__(game, display)
-        from .expectimax import board_to_move
-        self.search_func = board_to_move
-
-    def step(self):
-        direction = self.search_func(self.game.board)
-        return direction
